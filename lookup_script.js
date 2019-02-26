@@ -14,7 +14,7 @@ const client = new pg.Client({
   port     : settings.port,
   ssl      : settings.ssl
 });
-
+console.log(client)
 const prompt = process.argv[2]
 let currentPlace = 0
 console.log(prompt)
@@ -28,6 +28,7 @@ client.connect((err) => {
       return console.error("error running query", err);
     
     } else {
+      console.log(result.rows)
       getInfo(result)
     client.end();
     }
@@ -38,7 +39,7 @@ function getInfo (result) {
   for (names in result.rows) {
     if (result.rows[names].first_name === prompt) {
       currentPlace++
-      //Convert Birthday into year.
+      //Convert Birthday into yeay
       let date = new Date(result.rows[names].birthdate);
       let year = date.getFullYear();
       let month = date.getMonth()+1;
